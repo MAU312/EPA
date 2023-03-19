@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import Clase.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
@@ -46,8 +49,18 @@ public class LogIn extends javax.swing.JFrame {
         });
 
         bttIngresar.setText("Ingresar");
+        bttIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttIngresarActionPerformed(evt);
+            }
+        });
 
         bttRegistrarse.setText("Registrarse");
+        bttRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttRegistrarseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,6 +103,24 @@ public class LogIn extends javax.swing.JFrame {
     private void txfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfUsuarioActionPerformed
+
+    private void bttIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarActionPerformed
+        if(txfContraseña.getText()==null || txfUsuario.getText()==null){
+            JOptionPane.showMessageDialog(null, "Debe completar los campos.");
+        }else{
+            VentaPrincipal vP = new VentaPrincipal();
+            vP.setLg(this);
+            this.setVisible(false);
+            vP.setVisible(true);
+        }
+    }//GEN-LAST:event_bttIngresarActionPerformed
+
+    private void bttRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttRegistrarseActionPerformed
+        SignIn si = new SignIn();
+        si.setLogIn(this);
+        this.setVisible(false);
+        si.setVisible(true);
+    }//GEN-LAST:event_bttRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
