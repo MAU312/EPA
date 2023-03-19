@@ -108,10 +108,7 @@ public class LogIn extends javax.swing.JFrame {
         if(txfContraseña.getText()==null || txfUsuario.getText()==null){
             JOptionPane.showMessageDialog(null, "Debe completar los campos.");
         }else{
-            VentaPrincipal vP = new VentaPrincipal();
-            vP.setLg(this);
-            this.setVisible(false);
-            vP.setVisible(true);
+            if()
         }
     }//GEN-LAST:event_bttIngresarActionPerformed
 

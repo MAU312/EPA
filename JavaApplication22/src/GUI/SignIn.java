@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class SignIn extends javax.swing.JFrame {
 
     private LogIn logIn;
+    private Usuario u;
     public SignIn() {
         initComponents();
     }
@@ -155,7 +156,10 @@ public class SignIn extends javax.swing.JFrame {
                 |txfUsuario.getText() == null |txfContraseñaUsuario.getText() == null){
             JOptionPane.showMessageDialog(null, "Porfavor Complete todos los campos.");
         }else{
-            Usuario u = new Usuario(txfNombreUsuario.getText(), txfUsuario.getText(), txfContraseñaUsuario.getText(), txfCorreoUsuario.getText());
+            u.setNombreU(txfNombreUsuario.getText());
+            u.setCorreoU(txfCorreoUsuario.getText());
+            u.setUsuario(txfUsuario.getText());
+            u.setPasswordU(txfContraseñaUsuario.getText());
             this.logIn.setVisible(true);
             this.dispose();
 
