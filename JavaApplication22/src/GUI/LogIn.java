@@ -107,8 +107,6 @@ public class LogIn extends javax.swing.JFrame {
     private void bttIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarActionPerformed
         if(txfContraseña.getText()==null || txfUsuario.getText()==null){
             JOptionPane.showMessageDialog(null, "Debe completar los campos.");
-        }else{
-            if()
         }
     }//GEN-LAST:event_bttIngresarActionPerformed
 
