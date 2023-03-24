@@ -20,7 +20,7 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         this.setLocationRelativeTo(this);
-        SetImageLabel(cuadro,"src/Imagenes/FidEpa.png");
+        SetImageLabel(cuadro,"src/Imagenes/FidEpakk.png");
       
         
     }
@@ -61,7 +61,10 @@ public class LogIn extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        cuadro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("FidEpa Login");
 
         lblUsuario.setForeground(new java.awt.Color(153, 153, 153));
@@ -76,7 +79,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        bttIngresar.setBackground(new java.awt.Color(0, 0, 0));
+        bttIngresar.setBackground(new java.awt.Color(0, 0, 255));
         bttIngresar.setForeground(new java.awt.Color(255, 255, 255));
         bttIngresar.setText("Ingresar");
         bttIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +89,7 @@ public class LogIn extends javax.swing.JFrame {
         });
 
         bttRegistrarse.setBackground(new java.awt.Color(255, 255, 255));
+        bttRegistrarse.setForeground(new java.awt.Color(0, 0, 255));
         bttRegistrarse.setText("Crear cuenta");
         bttRegistrarse.setActionCommand("Create Account");
         bttRegistrarse.setBorder(null);
