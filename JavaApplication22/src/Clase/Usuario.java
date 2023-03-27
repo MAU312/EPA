@@ -1,10 +1,14 @@
 package Clase;
 
-public class Usuario {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Usuario implements Serializable, Comparable<Usuario> {
    private String nombreU;
    private String usuario;
    private String passwordU;
    private String correoU;
+   
 
     public Usuario() {
     }
@@ -46,6 +50,11 @@ public class Usuario {
 
     public void setCorreoU(String correoU) {
         this.correoU = correoU;
+    }
+
+    @Override
+    public int compareTo(Usuario o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
    
    

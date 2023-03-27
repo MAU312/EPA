@@ -4,7 +4,12 @@
  */
 package GUI;
 
+import Clase.ListaUsuarios;
 import Clase.Usuario;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +19,8 @@ import javax.swing.JOptionPane;
 public class SignIn extends javax.swing.JFrame {
 
     private LogIn logIn;
-    private Usuario u;
+    static ArrayList<Usuario> UsuariosCreados = new ArrayList<Usuario>();
+    
     public SignIn() {
         initComponents();
     }
@@ -213,17 +219,28 @@ public class SignIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txfContraseñaUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(txfNombreUsuario.getText() == null | txfCorreoUsuario.getText() == null
-                |txfUsuario.getText() == null |txfContraseñaUsuario.getText() == null){
+        if(txfNombreUsuario.getText().isBlank()|| txfCorreoUsuario.getText().isBlank()
+                |txfUsuario.getText().isBlank() || txfContraseñaUsuario.getText().isBlank()){
             JOptionPane.showMessageDialog(null, "Porfavor Complete todos los campos.");
         }else{
-            u.setNombreU(txfNombreUsuario.getText());
-            u.setCorreoU(txfCorreoUsuario.getText());
-            u.setUsuario(txfUsuario.getText());
-            u.setPasswordU(txfContraseñaUsuario.getText());
+            Usuario u = new Usuario(txfNombreUsuario.getText(),txfCorreoUsuario.getText(),txfUsuario.getText(),txfContraseñaUsuario.getText());
+            UsuariosCreados.add(u);
+            Collections.sort(UsuariosCreados);
+            ListaUsuarios nLista = new ListaUsuarios(UsuariosCreados);
+            try {
+                
+                FileOutputStream miArchio = new FileOutputStream("UsuariosCreados");
+                ObjectOutputStream output = new ObjectOutputStream(miArchio);
+                output.writeObject(nLista);
+                output.close();
+                miArchio.close();
+
+            } catch (Exception ex) {
+                System.out.println("Exception: " + ex.getMessage());
+            }
+            JOptionPane.showMessageDialog(null,"Se ha agregado el usuario con exito.");
             this.logIn.setVisible(true);
             this.dispose();
-
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

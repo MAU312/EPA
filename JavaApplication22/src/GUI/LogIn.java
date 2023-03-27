@@ -4,8 +4,11 @@
  */
 package GUI;
 
+import Clase.ListaUsuarios;
 import Clase.Usuario;
 import java.awt.Image;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -15,16 +18,24 @@ import javax.swing.JOptionPane;
 
 
 public class LogIn extends javax.swing.JFrame {
-
- 
+    
+    private VentaPrincipal vPrincipal;
+    
     public LogIn() {
         initComponents();
         this.setLocationRelativeTo(this);
         SetImageLabel(cuadro,"src/Imagenes/FidEpakk.png");
-      
-        
     }
 
+    public VentaPrincipal getvPrincipal() {
+        return vPrincipal;
+    }
+
+    public void setvPrincipal(VentaPrincipal vPrincipal) {
+        this.vPrincipal = vPrincipal;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -171,8 +182,29 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txfUsuarioActionPerformed
 
     private void bttIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarActionPerformed
-        if(txfContraseña.getText()==null || txfUsuario.getText()==null){
+        if(txfContraseña.getText().isBlank() || txfUsuario.getText().isBlank()){
             JOptionPane.showMessageDialog(null, "Debe completar los campos.");
+        }else{
+            try{
+            FileInputStream miArchio2 = new FileInputStream("UsuariosCreados");
+            ObjectInputStream input = new ObjectInputStream(miArchio2);
+            ListaUsuarios uLeido= (ListaUsuarios) input.readObject();
+            
+            for (int i = 0; i < uLeido.getListaDeUsuarios().size(); i++) {
+                if((uLeido.getListaDeUsuarios().get(i).getUsuario().equals(txfUsuario)) &&(uLeido.getListaDeUsuarios().get(i).getPasswordU().equals(txfContraseña)) ){
+                    this.vPrincipal.setVisible(true);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos.");
+                    i++;
+                }
+            }
+            input.close();
+            miArchio2.close();
+            
+            }catch(Exception ex){
+                System.out.println("Exception: " + ex.getMessage());
+            }
         }
     }//GEN-LAST:event_bttIngresarActionPerformed
 
@@ -183,9 +215,6 @@ public class LogIn extends javax.swing.JFrame {
         si.setVisible(true);
     }//GEN-LAST:event_bttRegistrarseActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

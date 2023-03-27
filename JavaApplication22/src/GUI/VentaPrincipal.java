@@ -9,19 +9,9 @@ package GUI;
  * @author Usuario
  */
 public class VentaPrincipal extends javax.swing.JFrame {
-
-    private LogIn lg;
     
     public VentaPrincipal() {
         initComponents();
-    }
-
-    public LogIn getLg() {
-        return lg;
-    }
-
-    public void setLg(LogIn lg) {
-        this.lg = lg;
     }
 
     /**
