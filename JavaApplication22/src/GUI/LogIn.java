@@ -52,9 +52,9 @@ public class LogIn extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         lblContraseña = new javax.swing.JLabel();
         txfUsuario = new javax.swing.JTextField();
-        txfContraseña = new javax.swing.JTextField();
         bttIngresar = new javax.swing.JButton();
         bttRegistrarse = new javax.swing.JButton();
+        txfContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -118,22 +118,19 @@ public class LogIn extends javax.swing.JFrame {
                 .addComponent(cuadro, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsuario)
+                    .addComponent(lblContraseña)
+                    .addComponent(bttIngresar)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txfUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                                .addComponent(lblUsuario)
-                                .addComponent(lblContraseña)
-                                .addComponent(bttIngresar)
-                                .addComponent(txfContraseña))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel1)))
-                        .addGap(53, 53, 53))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(238, 238, 238)
-                        .addComponent(bttRegistrarse)
-                        .addContainerGap())))
+                        .addComponent(bttRegistrarse))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,11 +145,11 @@ public class LogIn extends javax.swing.JFrame {
                 .addComponent(txfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblContraseña)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(txfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(34, 34, 34)
                 .addComponent(bttIngresar)
-                .addGap(0, 197, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(cuadro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -262,7 +259,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTextField txfContraseña;
+    private javax.swing.JPasswordField txfContraseña;
     private javax.swing.JTextField txfUsuario;
     // End of variables declaration//GEN-END:variables
 
