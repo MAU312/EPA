@@ -9,11 +9,19 @@ package GUI;
  * @author Usuario
  */
 public class VentaPrincipal extends javax.swing.JFrame {
-    
+    private LogIn logIn;
     public VentaPrincipal() {
         initComponents();
     }
 
+    public LogIn getLogIn() {
+        return logIn;
+    }
+
+    public void setLogIn(LogIn logIn) {
+        this.logIn = logIn;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

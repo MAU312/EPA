@@ -18,8 +18,7 @@ import javax.swing.JOptionPane;
 
 
 public class LogIn extends javax.swing.JFrame {
-    
-    private VentaPrincipal vPrincipal;
+   
     
     public LogIn() {
         initComponents();
@@ -27,15 +26,6 @@ public class LogIn extends javax.swing.JFrame {
         SetImageLabel(cuadro,"src/Imagenes/FidEpakk.png");
     }
 
-    public VentaPrincipal getvPrincipal() {
-        return vPrincipal;
-    }
-
-    public void setvPrincipal(VentaPrincipal vPrincipal) {
-        this.vPrincipal = vPrincipal;
-    }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -188,8 +178,11 @@ public class LogIn extends javax.swing.JFrame {
             ListaUsuarios uLeido= (ListaUsuarios) input.readObject();
             
             for (int i = 0; i < uLeido.getListaDeUsuarios().size(); i++) {
-                if((uLeido.getListaDeUsuarios().get(i).getUsuario().equals(txfUsuario)) &&(uLeido.getListaDeUsuarios().get(i).getPasswordU().equals(txfContraseña)) ){
-                    this.vPrincipal.setVisible(true);
+                if((txfUsuario.getText().equals(uLeido.getListaDeUsuarios().get(i).getUsuario())) &&(txfContraseña.getText().equals(uLeido.getListaDeUsuarios().get(i).getPasswordU())) ){
+                    VentaPrincipal vPrincipal = new VentaPrincipal();
+                    vPrincipal.setLogIn(this);
+                    this.setVisible(false);
+                    vPrincipal.setVisible(true);
                     this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos.");

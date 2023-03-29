@@ -223,7 +223,7 @@ public class SignIn extends javax.swing.JFrame {
                 |txfUsuario.getText().isBlank() || txfContraseñaUsuario.getText().isBlank()){
             JOptionPane.showMessageDialog(null, "Porfavor Complete todos los campos.");
         }else{
-            Usuario u = new Usuario(txfNombreUsuario.getText(),txfCorreoUsuario.getText(),txfUsuario.getText(),txfContraseñaUsuario.getText());
+            Usuario u = new Usuario(txfNombreUsuario.getText(),txfUsuario.getText(),txfContraseñaUsuario.getText(),txfCorreoUsuario.getText());
             UsuariosCreados.add(u);
             Collections.sort(UsuariosCreados);
             ListaUsuarios nLista = new ListaUsuarios(UsuariosCreados);
