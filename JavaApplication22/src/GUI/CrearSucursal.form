@@ -69,22 +69,26 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblDireccionSucursal" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblNombreSucursal" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblCodigoSucursal" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfNombreSucursal" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txfCodigoSucursal" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txfDireccionSucursal" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblDireccionSucursal" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNombreSucursal" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCodigoSucursal" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfNombreSucursal" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txfCodigoSucursal" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txfDireccionSucursal" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="98" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="bttAnadirSucursal" min="-2" pref="81" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="bttAnadirSucursal" min="-2" pref="81" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -115,7 +119,7 @@
         <Component class="javax.swing.JLabel" name="lblNombreSucursal">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f0" green="f0" red="f0" type="rgb"/>
+              <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nombre"/>
           </Properties>
@@ -123,7 +127,7 @@
         <Component class="javax.swing.JLabel" name="lblCodigoSucursal">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f0" green="f0" red="f0" type="rgb"/>
+              <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Codigo"/>
           </Properties>
@@ -131,7 +135,7 @@
         <Component class="javax.swing.JLabel" name="lblDireccionSucursal">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f0" green="f0" red="f0" type="rgb"/>
+              <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Direccion"/>
           </Properties>
@@ -175,10 +179,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblAnadirSucursal" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblAnadirSucursal" max="32767" attributes="0"/>
+                          <Component id="jPanel3" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -187,7 +194,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblAnadirSucursal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -204,6 +213,26 @@
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir Sucursal"/>
               </Properties>
             </Component>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="0" red="0" type="rgb"/>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

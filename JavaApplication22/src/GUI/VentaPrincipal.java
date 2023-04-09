@@ -70,6 +70,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        TablaInventario.setForeground(new java.awt.Color(240, 240, 240));
         TablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -84,8 +85,12 @@ public class VentaPrincipal extends javax.swing.JFrame {
         TablaInventario.setGridColor(new java.awt.Color(255, 255, 51));
         jScrollPane2.setViewportView(TablaInventario);
 
+        bttIngresarProd.setBackground(new java.awt.Color(0, 0, 255));
+        bttIngresarProd.setForeground(new java.awt.Color(240, 240, 240));
         bttIngresarProd.setText("Ingresar Producto");
 
+        bttTransferirProd.setBackground(new java.awt.Color(0, 0, 255));
+        bttTransferirProd.setForeground(new java.awt.Color(240, 240, 240));
         bttTransferirProd.setText("Transferir Producto");
         bttTransferirProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,8 +98,12 @@ public class VentaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        bttRetirarProd.setBackground(new java.awt.Color(0, 0, 255));
+        bttRetirarProd.setForeground(new java.awt.Color(240, 240, 240));
         bttRetirarProd.setText("Retirar Producto");
 
+        bttSolicitarProd.setBackground(new java.awt.Color(0, 0, 255));
+        bttSolicitarProd.setForeground(new java.awt.Color(240, 240, 240));
         bttSolicitarProd.setText("Solicitar Producto");
         bttSolicitarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +119,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -118,13 +128,10 @@ public class VentaPrincipal extends javax.swing.JFrame {
                     .addComponent(bttTransferirProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bttSolicitarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
                 .addContainerGap(60, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(170, 170, 170))
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,8 +149,8 @@ public class VentaPrincipal extends javax.swing.JFrame {
                         .addComponent(bttSolicitarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -193,11 +200,17 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_bttSolicitarProdActionPerformed
 
     private void eeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eeeActionPerformed
-        // TODO add your handling code here:
+       CambiarSucursal cms=new CambiarSucursal();
+       this.setVisible(false);
+       cms.setVisible(true);
+       
     }//GEN-LAST:event_eeeActionPerformed
 
     private void lllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lllActionPerformed
-       
+        CrearSucursal si = new  CrearSucursal ();
+        this.setVisible(false);
+        si.setVisible(true);
+                         
     }//GEN-LAST:event_lllActionPerformed
 
     /**

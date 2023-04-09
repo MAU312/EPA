@@ -183,7 +183,7 @@ public class LogIn extends javax.swing.JFrame {
                     vPrincipal.setLogIn(this);
                     this.setVisible(false);
                     vPrincipal.setVisible(true);
-                    this.dispose();
+                    this.dispose(); 
                 }else{
                     JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos.");
                     i++;
