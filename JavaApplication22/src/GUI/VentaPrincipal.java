@@ -18,6 +18,9 @@ public class VentaPrincipal extends javax.swing.JFrame {
       
         
     }
+  public void MostrarVentana(){
+      
+  }
 
     public LogIn getLogIn() {
         return logIn;
