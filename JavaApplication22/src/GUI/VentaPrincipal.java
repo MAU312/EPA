@@ -39,6 +39,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bttSolicitarProd = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -46,8 +47,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
         TablaInventario = new javax.swing.JTable();
         bttIngresarProd = new javax.swing.JButton();
         bttTransferirProd = new javax.swing.JButton();
-        bttRetirarProd = new javax.swing.JButton();
-        bttSolicitarProd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaAlerta = new javax.swing.JTextArea();
         bttIngresarProd1 = new javax.swing.JButton();
@@ -57,6 +56,18 @@ public class VentaPrincipal extends javax.swing.JFrame {
         menuCambiarSucursal = new javax.swing.JMenu();
         lll = new javax.swing.JMenuItem();
         eee = new javax.swing.JMenuItem();
+        MenuPedidos = new javax.swing.JMenu();
+        MenuClientes = new javax.swing.JMenuItem();
+        MenuProveedores = new javax.swing.JMenuItem();
+
+        bttSolicitarProd.setBackground(new java.awt.Color(0, 0, 255));
+        bttSolicitarProd.setForeground(new java.awt.Color(240, 240, 240));
+        bttSolicitarProd.setText("Solicitar Producto");
+        bttSolicitarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttSolicitarProdActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,19 +145,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        bttRetirarProd.setBackground(new java.awt.Color(0, 0, 255));
-        bttRetirarProd.setForeground(new java.awt.Color(240, 240, 240));
-        bttRetirarProd.setText("Retirar Producto");
-
-        bttSolicitarProd.setBackground(new java.awt.Color(0, 0, 255));
-        bttSolicitarProd.setForeground(new java.awt.Color(240, 240, 240));
-        bttSolicitarProd.setText("Solicitar Producto");
-        bttSolicitarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttSolicitarProdActionPerformed(evt);
-            }
-        });
-
         txaAlerta.setColumns(20);
         txaAlerta.setRows(5);
         jScrollPane1.setViewportView(txaAlerta);
@@ -162,7 +160,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
 
         bttIngresarProd2.setBackground(new java.awt.Color(0, 0, 255));
         bttIngresarProd2.setForeground(new java.awt.Color(240, 240, 240));
-        bttIngresarProd2.setText("Eliminar Producto");
+        bttIngresarProd2.setText("Retirar Producto");
         bttIngresarProd2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttIngresarProd2ActionPerformed(evt);
@@ -176,15 +174,11 @@ public class VentaPrincipal extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(bttIngresarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                        .addComponent(bttIngresarProd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bttIngresarProd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(bttRetirarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bttTransferirProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bttSolicitarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bttIngresarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(bttIngresarProd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bttIngresarProd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bttTransferirProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,12 +201,8 @@ public class VentaPrincipal extends javax.swing.JFrame {
                         .addComponent(bttIngresarProd2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bttIngresarProd1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bttRetirarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bttTransferirProd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bttSolicitarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bttTransferirProd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
 
@@ -237,6 +227,21 @@ public class VentaPrincipal extends javax.swing.JFrame {
         menuCambiarSucursal.add(eee);
 
         jMenuBar1.add(menuCambiarSucursal);
+
+        MenuPedidos.setText("Pedidos");
+
+        MenuClientes.setText("Por Clientes");
+        MenuPedidos.add(MenuClientes);
+
+        MenuProveedores.setText("Hacia Proveedores");
+        MenuProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuProveedoresActionPerformed(evt);
+            }
+        });
+        MenuPedidos.add(MenuProveedores);
+
+        jMenuBar1.add(MenuPedidos);
 
         setJMenuBar(jMenuBar1);
 
@@ -291,10 +296,14 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_bttIngresarProd1ActionPerformed
 
     private void bttIngresarProd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarProd2ActionPerformed
-        EliminarProductos eli=new EliminarProductos();
+        RetirarProductos eli=new RetirarProductos();
         this.setVisible(false);
         eli.setVisible(true);
     }//GEN-LAST:event_bttIngresarProd2ActionPerformed
+
+    private void MenuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuProveedoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,11 +341,13 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuClientes;
+    private javax.swing.JMenu MenuPedidos;
+    private javax.swing.JMenuItem MenuProveedores;
     private javax.swing.JTable TablaInventario;
     private javax.swing.JButton bttIngresarProd;
     private javax.swing.JButton bttIngresarProd1;
     private javax.swing.JButton bttIngresarProd2;
-    private javax.swing.JButton bttRetirarProd;
     private javax.swing.JButton bttSolicitarProd;
     private javax.swing.JButton bttTransferirProd;
     private javax.swing.JMenuItem eee;
