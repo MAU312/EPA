@@ -1,10 +1,9 @@
 package GUI;
 
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,23 +12,18 @@ public class VentaPrincipal extends javax.swing.JFrame {
     
     
     public VentaPrincipal() {
-        
         initComponents();
-      
-        
+        LeerSucursales();
+        mostarTablaInventario();
     }
-  public void MostrarVentana(){
-      
-  }
-
+    
     public LogIn getLogIn() {
         return logIn;
     }
-
+    
     public void setLogIn(LogIn logIn) {
         this.logIn = logIn;
     }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +37,8 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        cbxSucursal = new javax.swing.JComboBox<>();
+        bttCambiarSucu = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaInventario = new javax.swing.JTable();
         bttIngresarProd = new javax.swing.JButton();
@@ -55,7 +51,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCambiarSucursal = new javax.swing.JMenu();
         lll = new javax.swing.JMenuItem();
-        eee = new javax.swing.JMenuItem();
         MenuPedidos = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenuItem();
         MenuProveedores = new javax.swing.JMenuItem();
@@ -79,6 +74,13 @@ public class VentaPrincipal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("FidEpa");
 
+        bttCambiarSucu.setText("Cambiar Sucursal");
+        bttCambiarSucu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttCambiarSucuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -86,24 +88,27 @@ public class VentaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bttCambiarSucu)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cbxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bttCambiarSucu))
                 .addContainerGap())
         );
 
         TablaInventario.setForeground(new java.awt.Color(240, 240, 240));
         TablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Tipo", "Nombre", "Cantidad", "Precio"
@@ -179,7 +184,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
                     .addComponent(bttIngresarProd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bttIngresarProd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bttTransferirProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,14 +222,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCambiarSucursal.add(lll);
-
-        eee.setText("Cambiar Sucursal");
-        eee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eeeActionPerformed(evt);
-            }
-        });
-        menuCambiarSucursal.add(eee);
 
         jMenuBar1.add(menuCambiarSucursal);
 
@@ -267,18 +264,10 @@ public class VentaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bttSolicitarProdActionPerformed
 
-    private void eeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eeeActionPerformed
-       CambiarSucursal cms=new CambiarSucursal();
-       this.setVisible(false);
-       cms.setVisible(true);
-       
-    }//GEN-LAST:event_eeeActionPerformed
-
     private void lllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lllActionPerformed
-     CrearSucursal si = new  CrearSucursal ();
+        CrearSucursal si = new  CrearSucursal ();
         this.setVisible(false);
-        si.setVisible(true);
-                         
+        si.setVisible(true);              
     }//GEN-LAST:event_lllActionPerformed
 
     private void bttIngresarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarProdActionPerformed
@@ -291,8 +280,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
         ModificacionProducto mod=new ModificacionProducto();
         this.setVisible(false);
         mod.setVisible(true);
-      
-        
     }//GEN-LAST:event_bttIngresarProd1ActionPerformed
 
     private void bttIngresarProd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarProd2ActionPerformed
@@ -302,9 +289,57 @@ public class VentaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_bttIngresarProd2ActionPerformed
 
     private void MenuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuProveedoresActionPerformed
-        // TODO add your handling code here:
+        Proveedor pr = new Proveedor();
+        PedidoHaciaProveedor ph = new PedidoHaciaProveedor();
+        this.setVisible(false);
+        pr.setVisible(true);
+        ph.setVisible(true);
     }//GEN-LAST:event_MenuProveedoresActionPerformed
 
+    private void bttCambiarSucuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttCambiarSucuActionPerformed
+        limpiartabla();
+        mostarTablaInventario();
+    }//GEN-LAST:event_bttCambiarSucuActionPerformed
+    public void limpiartabla(){
+        DefaultTableModel modelo = (DefaultTableModel) TablaInventario.getModel();
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
+        }
+    }
+    public void LeerSucursales(){
+        try {
+            Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
+            String comandoSelect = "SELECT * FROM SUCURSALES";
+            PreparedStatement nuevoStatementPreparado = nuevaConexion.prepareStatement(comandoSelect);
+            ResultSet resultadoBusqueda = nuevoStatementPreparado.executeQuery();
+            while(resultadoBusqueda.next()){
+                cbxSucursal.addItem(resultadoBusqueda.getString("nombre"));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
+        }
+    }
+    
+    public void mostarTablaInventario(){
+        String nomSucr = (String) cbxSucursal.getSelectedItem();
+        try {
+            Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
+            String comandoSelect = "SELECT * FROM "+ nomSucr;
+            PreparedStatement nuevoStatementPreparado = nuevaConexion.prepareStatement(comandoSelect);
+            ResultSet resultadoBusqueda = nuevoStatementPreparado.executeQuery();
+            DefaultTableModel modelo = (DefaultTableModel) TablaInventario.getModel();
+            while(resultadoBusqueda.next()){
+                modelo.addRow(new Object[]{resultadoBusqueda.getInt("codigo"),
+                resultadoBusqueda.getString("nombre"),
+                resultadoBusqueda.getString("tipo"),
+                resultadoBusqueda.getString("cantidad"),
+                resultadoBusqueda.getString("precio"),});
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -345,12 +380,13 @@ public class VentaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuPedidos;
     private javax.swing.JMenuItem MenuProveedores;
     private javax.swing.JTable TablaInventario;
+    private javax.swing.JButton bttCambiarSucu;
     private javax.swing.JButton bttIngresarProd;
     private javax.swing.JButton bttIngresarProd1;
     private javax.swing.JButton bttIngresarProd2;
     private javax.swing.JButton bttSolicitarProd;
     private javax.swing.JButton bttTransferirProd;
-    private javax.swing.JMenuItem eee;
+    private javax.swing.JComboBox<String> cbxSucursal;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;

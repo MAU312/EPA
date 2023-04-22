@@ -4,16 +4,15 @@ public class Sucursal {
     private String nombreSuc;
     private String ubicacionSuc;
     private String codigoSuc;
-    private Inventario inventarioSuc;
 
     public Sucursal() {
     }
 
-    public Sucursal(String nombreSuc, String ubicacionSuc, String codigoSuc, Inventario inventarioSuc) {
+    public Sucursal(String nombreSuc, String ubicacionSuc, String codigoSuc) {
         this.nombreSuc = nombreSuc;
         this.ubicacionSuc = ubicacionSuc;
         this.codigoSuc = codigoSuc;
-        this.inventarioSuc = inventarioSuc;
+        
     }
 
     public String getNombreSuc() {
@@ -39,14 +38,4 @@ public class Sucursal {
     public void setCodigoSuc(String codigoSuc) {
         this.codigoSuc = codigoSuc;
     }
-
-    public Inventario getInventarioSuc() {
-        return inventarioSuc;
-    }
-
-    public void setInventarioSuc(Inventario inventarioSuc) {
-        this.inventarioSuc = inventarioSuc;
-    }
-    
-    
 }
