@@ -228,6 +228,11 @@ public class VentaPrincipal extends javax.swing.JFrame {
         MenuPedidos.setText("Pedidos");
 
         MenuClientes.setText("Por Clientes");
+        MenuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuClientesActionPerformed(evt);
+            }
+        });
         MenuPedidos.add(MenuClientes);
 
         MenuProveedores.setText("Hacia Proveedores");
@@ -300,6 +305,12 @@ public class VentaPrincipal extends javax.swing.JFrame {
         limpiartabla();
         mostarTablaInventario();
     }//GEN-LAST:event_bttCambiarSucuActionPerformed
+
+    private void MenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuClientesActionPerformed
+        PedidoDelCliente pc = new PedidoDelCliente();
+        this.setVisible(false);
+        pc.setVisible(true);
+    }//GEN-LAST:event_MenuClientesActionPerformed
     public void limpiartabla(){
         DefaultTableModel modelo = (DefaultTableModel) TablaInventario.getModel();
         for (int i = 0; i < modelo.getRowCount(); i++) {
