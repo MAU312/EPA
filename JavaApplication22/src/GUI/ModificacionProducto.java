@@ -4,9 +4,11 @@
  */
 package GUI;
 
+import Clase.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -21,6 +23,9 @@ public class ModificacionProducto extends javax.swing.JFrame {
      */
     public ModificacionProducto() {
         initComponents();
+        LeerSucursales();
+         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -40,11 +45,15 @@ public class ModificacionProducto extends javax.swing.JFrame {
         lblCodigoProducto = new javax.swing.JLabel();
         lblCantidadProducto = new javax.swing.JLabel();
         lblPrecioProducto = new javax.swing.JLabel();
-        txfcodigo2 = new javax.swing.JTextField();
-        txfnombre2 = new javax.swing.JTextField();
-        tcfCantidadProducto2 = new javax.swing.JTextField();
-        txfprecio2 = new javax.swing.JTextField();
+        txfCodigoProducto = new javax.swing.JTextField();
+        txfnombre = new javax.swing.JTextField();
+        txfCantidadProducto = new javax.swing.JTextField();
+        txfPrecioProducto = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        lal = new javax.swing.JComboBox<>();
+        lblPrecioProducto1 = new javax.swing.JLabel();
+        lblPrecioProducto2 = new javax.swing.JLabel();
+        cbxCategoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,15 +112,15 @@ public class ModificacionProducto extends javax.swing.JFrame {
         lblPrecioProducto.setForeground(new java.awt.Color(153, 153, 153));
         lblPrecioProducto.setText("Precio");
 
-        txfcodigo2.addActionListener(new java.awt.event.ActionListener() {
+        txfCodigoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfcodigo2ActionPerformed(evt);
+                txfCodigoProductoActionPerformed(evt);
             }
         });
 
-        txfnombre2.addActionListener(new java.awt.event.ActionListener() {
+        txfnombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfnombre2ActionPerformed(evt);
+                txfnombreActionPerformed(evt);
             }
         });
 
@@ -124,6 +133,19 @@ public class ModificacionProducto extends javax.swing.JFrame {
             }
         });
 
+        lblPrecioProducto1.setForeground(new java.awt.Color(153, 153, 153));
+        lblPrecioProducto1.setText("Categoria");
+
+        lblPrecioProducto2.setForeground(new java.awt.Color(153, 153, 153));
+        lblPrecioProducto2.setText("Sucursal");
+
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hogar", "Construccion", "Iluminacion" }));
+        cbxCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -131,24 +153,35 @@ public class ModificacionProducto extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblNombreProducto)
-                            .addGap(51, 51, 51)
-                            .addComponent(txfcodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblCodigoProducto)
-                                .addComponent(lblCantidadProducto)
-                                .addComponent(lblPrecioProducto))
-                            .addGap(42, 42, 42)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tcfCantidadProducto2)
-                                .addComponent(txfnombre2, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                                .addComponent(txfprecio2)))))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombreProducto)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCodigoProducto)
+                            .addComponent(lblCantidadProducto)
+                            .addComponent(lblPrecioProducto)
+                            .addComponent(lblPrecioProducto2)
+                            .addComponent(lblPrecioProducto1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txfCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txfCantidadProducto)
+                                        .addComponent(txfnombre, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                                        .addComponent(txfPrecioProducto))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(46, 46, 46)))
+                .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(81, 81, 81))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,22 +190,30 @@ public class ModificacionProducto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreProducto)
-                    .addComponent(txfcodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txfnombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCodigoProducto))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tcfCantidadProducto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfCantidadProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCantidadProducto))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txfprecio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfPrecioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecioProducto))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioProducto1)
+                    .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioProducto2)
+                    .addComponent(lal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -189,37 +230,17 @@ public class ModificacionProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txfnombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfnombre2ActionPerformed
+    private void txfnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfnombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txfnombre2ActionPerformed
+    }//GEN-LAST:event_txfnombreActionPerformed
 
-    private void txfcodigo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfcodigo2ActionPerformed
+    private void txfCodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfCodigoProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txfcodigo2ActionPerformed
+    }//GEN-LAST:event_txfCodigoProductoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       try {
-            //CREAMOS LA CONEXION CON LA BD
-            Connection nuevaConexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/inventario", "root", "Errol777@");
-            //DEFINIR EL COMANDO CON PARAMETROS
-            String comando_select = "UPDATE BASEDATOS SET NOMBRE = "
-                    + "?, CANTIDAD = ?, PRECIO = ? WHERE Codigo = ?";
-            PreparedStatement nuevoStatamentPreparado = 
-                    nuevaConexion.prepareStatement(comando_select);
-            //DEFINIR LOS PARAMETROS
-            nuevoStatamentPreparado.setString(1, txfnombre2.getText());
-            nuevoStatamentPreparado.setString(2, tcfCantidadProducto2.getText());
-            nuevoStatamentPreparado.setString(3, txfprecio2.getText());
-            nuevoStatamentPreparado.setString(4, txfcodigo2.getText());
-            //EJECUTAMOS EL COMANDO
-            nuevoStatamentPreparado.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Se ha actualizado el "
-                    + "registro exitosamente");          
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "ha ocurrido un error"
-                    + " al conectarse a la base de datos. Error " + ex.getMessage());
-        }  
+
+        ModificarProducto();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -228,9 +249,48 @@ public class ModificacionProducto extends javax.swing.JFrame {
         vent.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void cbxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoriaActionPerformed
+    
+    }//GEN-LAST:event_cbxCategoriaActionPerformed
+    
+    public void LeerSucursales() {
+        try {
+            Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
+            String comandoSelect = "SELECT * FROM SUCURSALES";
+            PreparedStatement nuevoStatementPreparado = nuevaConexion.prepareStatement(comandoSelect);
+            ResultSet resultadoBusqueda = nuevoStatementPreparado.executeQuery();
+            while (resultadoBusqueda.next()) {
+                lal.addItem(resultadoBusqueda.getString("nombre"));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
+        }
+    }
+    
+    public void ModificarProducto(){
+        String nomSucr = (String) lal.getSelectedItem();
+        String categoria = (String) cbxCategoria.getSelectedItem();
+        Producto p = new Producto(txfnombre.getText(), txfCodigoProducto.getText(),
+                Integer.parseInt(txfCantidadProducto.getText()), Double.parseDouble(txfPrecioProducto.getText()), categoria);
+        try {
+            
+            Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
+            String comando_select = "UPDATE " + nomSucr + " SET NOMBRE = "
+                    + "?, TIPO = ?, CANTIDAD = ?, PRECIO = ? WHERE Codigo = ?";
+            PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_select);
+            nuevoStatamentPreparado.setString(1, p.getCategoria());
+            nuevoStatamentPreparado.setString(2, p.getNombreProd());
+            nuevoStatamentPreparado.setString(3, Integer.toString(p.getCantidad()));
+            nuevoStatamentPreparado.setString(4, String.valueOf(p.getPrecio()));
+            nuevoStatamentPreparado.setString(5, p.getCodigoProd());
+            nuevoStatamentPreparado.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Producto modificado");
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
+        }
+    }
+  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -264,18 +324,22 @@ public class ModificacionProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JComboBox<String> lal;
     private javax.swing.JLabel lblCantidadProducto;
     private javax.swing.JLabel lblCodigoProducto;
     private javax.swing.JLabel lblNombreProducto;
     private javax.swing.JLabel lblPrecioProducto;
-    private javax.swing.JTextField tcfCantidadProducto2;
-    private javax.swing.JTextField txfcodigo2;
-    private javax.swing.JTextField txfnombre2;
-    private javax.swing.JTextField txfprecio2;
+    private javax.swing.JLabel lblPrecioProducto1;
+    private javax.swing.JLabel lblPrecioProducto2;
+    private javax.swing.JTextField txfCantidadProducto;
+    private javax.swing.JTextField txfCodigoProducto;
+    private javax.swing.JTextField txfPrecioProducto;
+    private javax.swing.JTextField txfnombre;
     // End of variables declaration//GEN-END:variables
 }

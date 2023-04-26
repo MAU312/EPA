@@ -10,6 +10,7 @@ public class CrearSucursal extends javax.swing.JFrame {
     
     public CrearSucursal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     @SuppressWarnings("unchecked")
@@ -216,7 +217,7 @@ public class CrearSucursal extends javax.swing.JFrame {
         try {
             Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
             String name = txfNombreSucursal.getText();
-            Sucursal sucu = new Sucursal(txfNombreSucursal.getText(), txfDireccionSucursal.getText(), txfCodigoSucursal.getText());
+            Sucursal sucu = new Sucursal(txfNombreSucursal.getText(), txfDireccionSucursal.getText(), txfCodigoSucursal.getText(),0);
             String sql = "CREATE TABLE "+ name +" ("
                     + "codigo int NOT NULL,"
                     + "nombre VARCHAR(50) NOT NULL,"

@@ -6,10 +6,13 @@ package GUI;
 
 import Clase.ListaUsuarios;
 import Clase.Usuario;
+import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +26,7 @@ public class SignIn extends javax.swing.JFrame {
     
     public SignIn() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public LogIn getLogIn() {
@@ -223,6 +227,15 @@ public class SignIn extends javax.swing.JFrame {
                 |txfUsuario.getText().isBlank() || txfContraseñaUsuario.getText().isBlank()){
             JOptionPane.showMessageDialog(null, "Porfavor Complete todos los campos.");
         }else{
+            String correo = txfCorreoUsuario.getText();
+            String correoRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$";
+            Pattern pattern = Pattern.compile(correoRegex);
+            Matcher matcher = pattern.matcher(correo);
+            if(!matcher.matches() || !correo.endsWith("@gmail.com")){
+                txfCorreoUsuario.setBackground(Color.RED);
+                JOptionPane.showMessageDialog(null, "Por favor ingrese un correo válido (debe contener al menos 6 caracteres, una mayúscula, una minúscula y un número, y terminar en @gmail.com).");
+                return;
+            }
             Usuario u = new Usuario(txfNombreUsuario.getText(),txfUsuario.getText(),txfContraseñaUsuario.getText(),txfCorreoUsuario.getText());
             UsuariosCreados.add(u);
             Collections.sort(UsuariosCreados);
@@ -237,11 +250,11 @@ public class SignIn extends javax.swing.JFrame {
 
             } catch (Exception ex) {
                 System.out.println("Exception: " + ex.getMessage());
-            }
-            JOptionPane.showMessageDialog(null,"Se ha agregado el usuario con exito.");
-            this.logIn.setVisible(true);
-            this.dispose();
+            }        
         }
+        JOptionPane.showMessageDialog(null,"Se ha agregado el usuario con exito.");
+        this.logIn.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txfNombreUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNombreUsuario1ActionPerformed

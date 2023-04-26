@@ -1,19 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
+import Clase.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 
-/**
- *
- * @author erlos
- */
 public class RetirarProductos extends javax.swing.JFrame {
 
     /**
@@ -21,6 +14,8 @@ public class RetirarProductos extends javax.swing.JFrame {
      */
     public RetirarProductos() {
         initComponents();
+        LeerSucursales();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -35,15 +30,17 @@ public class RetirarProductos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        eliminarpr1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        eliminarpr = new javax.swing.JTextField();
+        txfCodigoAeliminar = new javax.swing.JTextField();
         bttRetirar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        eliminarpr1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        lol = new javax.swing.JComboBox<>();
 
         jButton2.setBackground(new java.awt.Color(0, 0, 255));
         jButton2.setForeground(new java.awt.Color(0, 0, 255));
@@ -69,6 +66,14 @@ public class RetirarProductos extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        eliminarpr1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarpr1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Cantidad");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,13 +135,7 @@ public class RetirarProductos extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Cantidad");
-
-        eliminarpr1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarpr1ActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Sucursal");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,23 +143,23 @@ public class RetirarProductos extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(eliminarpr1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(224, 224, 224))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(eliminarpr, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(89, 89, 89))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bttRetirar)
                 .addGap(14, 14, 14))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfCodigoAeliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,12 +168,12 @@ public class RetirarProductos extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(eliminarpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfCodigoAeliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(eliminarpr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                    .addComponent(lol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addComponent(bttRetirar)
                 .addGap(14, 14, 14))
         );
@@ -194,24 +193,7 @@ public class RetirarProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttRetirarActionPerformed
-       try {
-            //CREAMOS LA CONEXION CON LA BD
-            Connection nuevaConexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/inventario", "root", "Errol777@");
-            //DEFINIR EL COMANDO CON PARAMETROS
-            String comando_select = "DELETE FROM BASEDATOS WHERE Codigo = ?";
-            PreparedStatement nuevoStatamentPreparado = 
-                    nuevaConexion.prepareStatement(comando_select);
-            //DEFINIR LOS PARAMETROS
-            nuevoStatamentPreparado.setString(1, eliminarpr.getText());
-            //EJECUTAMOS EL COMANDO
-            nuevoStatamentPreparado.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Se ha eliminado el "
-                    + "registro exitosamente");          
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "ha ocurrido un error"
-                    + " al conectarse a la base de datos. Error " + ex.getMessage());
-        }  
+        RetirarProducto();
     }//GEN-LAST:event_bttRetirarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -230,7 +212,36 @@ public class RetirarProductos extends javax.swing.JFrame {
         VentaPrincipal vent= new VentaPrincipal();
         vent.setVisible(true);
         this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton3MouseClicked
+    public void LeerSucursales() {
+        try {
+            Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
+            String comandoSelect = "SELECT * FROM SUCURSALES";
+            PreparedStatement nuevoStatementPreparado = nuevaConexion.prepareStatement(comandoSelect);
+            ResultSet resultadoBusqueda = nuevoStatementPreparado.executeQuery();
+            while (resultadoBusqueda.next()) {
+                lol.addItem(resultadoBusqueda.getString("nombre"));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
+        }
+    }
+
+    public void RetirarProducto() {
+        String nomSucr = (String) lol.getSelectedItem();
+        txfCodigoAeliminar.getText();
+        try {
+            Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
+            String comando_Delete = "DELETE FROM " + nomSucr + " WHERE codigo = ?";
+            PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_Delete);
+            nuevoStatamentPreparado.setString(1, txfCodigoAeliminar.getText());
+            nuevoStatamentPreparado.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -270,16 +281,18 @@ public class RetirarProductos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttRetirar;
-    private javax.swing.JTextField eliminarpr;
     private javax.swing.JTextField eliminarpr1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> lol;
+    private javax.swing.JTextField txfCodigoAeliminar;
     // End of variables declaration//GEN-END:variables
 }

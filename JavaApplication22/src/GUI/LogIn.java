@@ -23,6 +23,7 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         this.setLocationRelativeTo(this);
+        this.setLocationRelativeTo(null);
         SetImageLabel(cuadro,"src/Imagenes/FidEpakk.png");
     }
 

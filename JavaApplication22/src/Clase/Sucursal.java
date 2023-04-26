@@ -4,15 +4,16 @@ public class Sucursal {
     private String nombreSuc;
     private String ubicacionSuc;
     private String codigoSuc;
+    private int venta;
 
     public Sucursal() {
     }
 
-    public Sucursal(String nombreSuc, String ubicacionSuc, String codigoSuc) {
+    public Sucursal(String nombreSuc, String ubicacionSuc, String codigoSuc, int venta) {
         this.nombreSuc = nombreSuc;
         this.ubicacionSuc = ubicacionSuc;
         this.codigoSuc = codigoSuc;
-        
+        this.venta = venta;
     }
 
     public String getNombreSuc() {
@@ -38,4 +39,14 @@ public class Sucursal {
     public void setCodigoSuc(String codigoSuc) {
         this.codigoSuc = codigoSuc;
     }
+
+    public int getVenta() {
+        return venta;
+    }
+
+    public void setVenta(int venta) {
+        this.venta = venta;
+    }
+    
+   
 }

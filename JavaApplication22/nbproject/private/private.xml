@@ -4,11 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Usuario/Documents/GitHub/FidEPA/JavaApplication22/src/GUI/VentaPrincipal.java</file>
-            <file>file:/D:/Usuario/Documents/GitHub/FidEPA/JavaApplication22/src/GUI/PedidoDelCliente.java</file>
-            <file>file:/D:/Usuario/Documents/GitHub/FidEPA/JavaApplication22/src/GUI/IngresarProducto.java</file>
-            <file>file:/D:/Usuario/Documents/GitHub/FidEPA/JavaApplication22/src/GUI/CrearSucursal.java</file>
-            <file>file:/D:/Usuario/Documents/GitHub/FidEPA/JavaApplication22/src/Clase/Sucursal.java</file>
-            <file>file:/D:/Usuario/Documents/GitHub/FidEPA/JavaApplication22/src/GUI/CambiarSucursal.java</file>
+            <file>file:/D:/Usuario/Documents/GitHub/FidEPA/JavaApplication22/src/Clase/Venta.java</file>
+            <file>file:/D:/Usuario/Documents/GitHub/FidEPA/JavaApplication22/src/GUI/TransferirProducto.java</file>
         </group>
     </open-files>
 </project-private>
