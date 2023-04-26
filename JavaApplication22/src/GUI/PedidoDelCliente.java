@@ -1,6 +1,7 @@
 package GUI;
 
 import Clase.Cliente;
+import Clase.LeerSucursales;
 import Clase.Producto;
 import Clase.Sucursal;
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class PedidoDelCliente extends javax.swing.JFrame {
+public class PedidoDelCliente extends javax.swing.JFrame implements LeerSucursales{
     
     static ArrayList<Sucursal> sucursales = new ArrayList<Sucursal>();
     
@@ -288,8 +289,6 @@ public class PedidoDelCliente extends javax.swing.JFrame {
             //EJECUTAMOS EL COMANDO
             
             nuevoStatamentPreparado.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Se ha creado el "
-                    + "registro exitosamente");   
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "ha ocurrido un error"
                     + " al conectarse a la base de datos. Error " + ex.getMessage());
@@ -312,8 +311,7 @@ public class PedidoDelCliente extends javax.swing.JFrame {
             //EJECUTAMOS EL COMANDO
             ventas();
             nuevoStatamentPreparado.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Se ha creado el "
-                    + "registro exitosamente");   
+            JOptionPane.showMessageDialog(this, "Se ha creado el registro exitosamente");   
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "ha ocurrido un error"
                     + " al conectarse a la base de datos. Error " + ex.getMessage());
@@ -321,24 +319,25 @@ public class PedidoDelCliente extends javax.swing.JFrame {
     }
     
     public void ventas(){
+        Producto p = new Producto();
+        String sucu = (String)cbxSucursal.getSelectedItem();
         try {
-            Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
-            String comandoSelect = "SELECT * FROM VENTA";
-            PreparedStatement nuevoStatementPreparado = nuevaConexion.prepareStatement(comandoSelect);
-            ResultSet resultadoBusqueda = nuevoStatementPreparado.executeQuery();
-            String s = (String)cbxSucursal.getSelectedItem();
-            while(resultadoBusqueda.next()){
-                if(s.equals(resultadoBusqueda.getString("Sucursal"))){
-                    editarVenta(resultadoBusqueda.getInt("NumeroVentas"));
-                    break;
-                }else if(!(s.equals(resultadoBusqueda.getString("Sucursal")))){
-                    insertarVenta();
-                }
-            }
-            insertarVenta();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
+            Connection nuevaConexion = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/basedatos", "root", "Steve123.");//DEFINIR EL COMANDO CON PARAMETROS
+            String comando_select = "SELECT SUCURSAL, NUMEROVENTAS  FROM VENTA WHERE Sucursal = ?";
+            PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_select); //DEFINIR LOS PARAMETROS
+            nuevoStatamentPreparado.setString(1, sucu); //EJECUTAMOS EL COMANDO Y ALMACENAMOS EL RESULTADO
+            ResultSet resultadoBusqueda = nuevoStatamentPreparado.executeQuery(); //EN ESTE CASO SOLO QUEREMOS QUE NOS MUESTRE EL PRIMER RESULTADO
+            if (resultadoBusqueda.next()) {
+                editarVenta(resultadoBusqueda.getInt("NumeroVentas"), sucu);
+            }else {
+                insertarVenta();
+            }   
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "ha ocurrido un error"
+                    + " al conectarse a la base de datos. Error " + ex.getMessage());
         }
+   
     }
     
     
@@ -354,23 +353,21 @@ public class PedidoDelCliente extends javax.swing.JFrame {
             nuevoStatamentPreparado.setString(1, (String)cbxSucursal.getSelectedItem());
             nuevoStatamentPreparado.setInt(2, 1);
             //EJECUTAMOS EL COMANDO
-            nuevoStatamentPreparado.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Se ha creado el "
-                    + "registro exitosamente");   
+            nuevoStatamentPreparado.executeUpdate();  
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "ha ocurrido un error"
                     + " al conectarse a la base de datos. Error " + ex.getMessage());
         }
     }
     
-    public void editarVenta(int num){
+    public void editarVenta(int num, String sucu){
         try {
             Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
-            String comando_select = "UPDATE VENTA SET NUMEROVENTAS = ?";
+            String comando_select = "UPDATE VENTA SET NUMEROVENTAS = ? WHERE Sucursal = ?" ;
             PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_select);
             nuevoStatamentPreparado.setInt(1, num+1);
+            nuevoStatamentPreparado.setString(2, sucu);
             nuevoStatamentPreparado.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Producto modificado");
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());

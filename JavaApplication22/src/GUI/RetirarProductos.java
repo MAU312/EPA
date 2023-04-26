@@ -1,5 +1,6 @@
 package GUI;
 
+import Clase.LeerSucursales;
 import Clase.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +8,7 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 
-public class RetirarProductos extends javax.swing.JFrame {
+public class RetirarProductos extends javax.swing.JFrame implements LeerSucursales{
 
     /**
      * Creates new form EliminarProductos

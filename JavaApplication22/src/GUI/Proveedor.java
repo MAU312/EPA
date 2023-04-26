@@ -8,7 +8,7 @@ public class Proveedor extends javax.swing.JFrame {
     public Proveedor() {
         initComponents();
         IniciarServidor();
-         this.setLocationRelativeTo(null);
+         this.setLocation(600,220);
     }
     
     public void IniciarServidor() {

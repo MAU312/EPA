@@ -1,5 +1,6 @@
 package GUI;
 
+import Clase.LeerSucursales;
 import Clase.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
-public class IngresarProducto extends javax.swing.JFrame {
+public class IngresarProducto extends javax.swing.JFrame implements LeerSucursales{
 
     public IngresarProducto() {
         initComponents();

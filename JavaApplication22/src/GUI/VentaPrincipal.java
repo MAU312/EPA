@@ -1,5 +1,6 @@
 package GUI;
 
+import Clase.LeerSucursales;
 import Clase.Venta;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +11,7 @@ import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class VentaPrincipal extends javax.swing.JFrame {
+public class VentaPrincipal extends javax.swing.JFrame implements LeerSucursales{
 
     private LogIn logIn;
     static ArrayList<Venta> ventas = new ArrayList<Venta>();
@@ -56,6 +57,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         bttIngresarProd1 = new javax.swing.JButton();
         bttIngresarProd2 = new javax.swing.JButton();
         bttRentabilidad = new javax.swing.JButton();
+        bttRegistrodeVentas = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCambiarSucursal = new javax.swing.JMenu();
@@ -114,13 +116,12 @@ public class VentaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        TablaInventario.setForeground(new java.awt.Color(240, 240, 240));
         TablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Categoria", "Nombre", "Cantidad", "Precio"
+                "Codigo", "Categoria", "Nombre", "Cantidad", "Precio/U"
             }
         ) {
             Class[] types = new Class [] {
@@ -190,6 +191,15 @@ public class VentaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        bttRegistrodeVentas.setBackground(new java.awt.Color(0, 0, 255));
+        bttRegistrodeVentas.setForeground(new java.awt.Color(255, 255, 255));
+        bttRegistrodeVentas.setText("Registro de Ventas");
+        bttRegistrodeVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttRegistrodeVentasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -210,7 +220,9 @@ public class VentaPrincipal extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(bttRentabilidad)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bttRegistrodeVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bttRentabilidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -231,9 +243,11 @@ public class VentaPrincipal extends javax.swing.JFrame {
                         .addComponent(bttIngresarProd1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bttTransferirProd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bttRentabilidad)
-                .addGap(47, 47, 47))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bttRegistrodeVentas)
+                .addGap(27, 27, 27))
         );
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -289,6 +303,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
     private void bttTransferirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttTransferirProdActionPerformed
        TransferirProducto tp = new TransferirProducto();
        tp.setVisible(true);
+       this.setVisible(false);
        this.dispose();
     }//GEN-LAST:event_bttTransferirProdActionPerformed
 
@@ -300,24 +315,28 @@ public class VentaPrincipal extends javax.swing.JFrame {
         CrearSucursal si = new CrearSucursal();
         this.setVisible(false);
         si.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lllActionPerformed
 
     private void bttIngresarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarProdActionPerformed
         IngresarProducto si = new IngresarProducto();
         this.setVisible(false);
         si.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_bttIngresarProdActionPerformed
 
     private void bttIngresarProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarProd1ActionPerformed
         ModificacionProducto mod = new ModificacionProducto();
         this.setVisible(false);
         mod.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_bttIngresarProd1ActionPerformed
 
     private void bttIngresarProd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIngresarProd2ActionPerformed
         RetirarProductos eli = new RetirarProductos();
         this.setVisible(false);
         eli.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_bttIngresarProd2ActionPerformed
 
     private void MenuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuProveedoresActionPerformed
@@ -326,6 +345,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
         pr.setVisible(true);
         ph.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_MenuProveedoresActionPerformed
 
     private void bttCambiarSucuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttCambiarSucuActionPerformed
@@ -339,12 +359,20 @@ public class VentaPrincipal extends javax.swing.JFrame {
         PedidoDelCliente pc = new PedidoDelCliente();
         this.setVisible(false);
         pc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_MenuClientesActionPerformed
 
     private void bttRentabilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttRentabilidadActionPerformed
         Rentabilidad();
         MostrarMayorRentabilidad();
     }//GEN-LAST:event_bttRentabilidadActionPerformed
+
+    private void bttRegistrodeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttRegistrodeVentasActionPerformed
+        RegistroVentas rv = new RegistroVentas();
+        rv.setVisible(true);
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_bttRegistrodeVentasActionPerformed
     public void limpiartabla() {
         DefaultTableModel modelo = (DefaultTableModel) TablaInventario.getModel();
         for (int i = 0; i < modelo.getRowCount(); i++) {
@@ -370,8 +398,6 @@ public class VentaPrincipal extends javax.swing.JFrame {
                 venta.setSucursal(resultadoBusqueda.getString("Sucursal"));
                 venta.setNumeroVentas(resultadoBusqueda.getInt("NumeroVentas"));
                 ventas.add(venta);
-                
-                
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
@@ -400,7 +426,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
             ResultSet resultadoBusqueda = nuevoStatementPreparado.executeQuery();
             while (resultadoBusqueda.next()) {
                 if(resultadoBusqueda.getInt("cantidad")<=2){
-                    s=s+"El producto "+resultadoBusqueda.getString("nombre")+" tiene pocas unidades\n";
+                    s="️⚠️El producto "+resultadoBusqueda.getString("nombre")+" tiene pocas unidades\n";
                     txaAlerta.append(s);
                 }
             }
@@ -477,6 +503,7 @@ public class VentaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton bttIngresarProd;
     private javax.swing.JButton bttIngresarProd1;
     private javax.swing.JButton bttIngresarProd2;
+    private javax.swing.JButton bttRegistrodeVentas;
     private javax.swing.JButton bttRentabilidad;
     private javax.swing.JButton bttSolicitarProd;
     private javax.swing.JButton bttTransferirProd;

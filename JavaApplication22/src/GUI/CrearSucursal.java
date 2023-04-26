@@ -229,7 +229,7 @@ public class CrearSucursal extends javax.swing.JFrame {
             PreparedStatement nuevo2StatamentPreparado = nuevaConexion.prepareStatement(sql);
             nuevo2StatamentPreparado.execute();
             anadirTablaSucursales(sucu);
-            JOptionPane.showMessageDialog(this, "Se ha creado el registro exitosamente");
+            JOptionPane.showMessageDialog(this, "Se ha creado la sucursal exitosamente");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
         }
@@ -250,11 +250,9 @@ public class CrearSucursal extends javax.swing.JFrame {
             nuevoStatamentPreparado.setString(2, s.getNombreSuc());
             nuevoStatamentPreparado.setString(3, s.getUbicacionSuc());
             nuevoStatamentPreparado.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Se ha creado el registro exitosamente");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
         }
-        
     }
     /**
      * @param args the command line arguments

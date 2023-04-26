@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Clase.LeerSucursales;
 import Clase.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author mauhi
  */
-public class TransferirProducto extends javax.swing.JFrame {
+public class TransferirProducto extends javax.swing.JFrame implements LeerSucursales{
 
 
     public TransferirProducto() {
@@ -191,6 +192,7 @@ public class TransferirProducto extends javax.swing.JFrame {
         VentaPrincipal vent= new VentaPrincipal();
         vent.setVisible(true);
         this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -222,21 +224,13 @@ public class TransferirProducto extends javax.swing.JFrame {
         String sOrigen = (String)cbxOrigen.getSelectedItem();
         String sDestino =(String)cbxDestino.getSelectedItem();
         try {
-            //CREAMOS LA CONEXION CON LA BD
             Connection nuevaConexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/basedatos", "root", "Steve123.");
-            //DEFINIR EL COMANDO CON PARAMETROS
+                    "jdbc:mysql://localhost/basedatos", "root", "Steve123.");//DEFINIR EL COMANDO CON PARAMETROS
             String comando_select = "SELECT CODIGO, NOMBRE, TIPO, CANTIDAD, PRECIO FROM "+ sOrigen+" WHERE codigo = ?";
-            PreparedStatement nuevoStatamentPreparado = 
-                    nuevaConexion.prepareStatement(comando_select);
-            //DEFINIR LOS PARAMETROS
-            nuevoStatamentPreparado.setString(1, txfCodigo.getText());
-            //EJECUTAMOS EL COMANDO Y ALMACENAMOS EL RESULTADO
-            ResultSet resultadoBusqueda = nuevoStatamentPreparado.executeQuery();
-
-            //EN ESTE CASO SOLO QUEREMOS QUE NOS MUESTRE EL PRIMER RESULTADO
-            if (resultadoBusqueda.next()) { //SI TIENE DATOS
-                //MUESTRELOS
+            PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_select); //DEFINIR LOS PARAMETROS
+            nuevoStatamentPreparado.setString(1, txfCodigo.getText()); //EJECUTAMOS EL COMANDO Y ALMACENAMOS EL RESULTADO
+            ResultSet resultadoBusqueda = nuevoStatamentPreparado.executeQuery(); //EN ESTE CASO SOLO QUEREMOS QUE NOS MUESTRE EL PRIMER RESULTADO
+            if (resultadoBusqueda.next()) {
                 p.setCodigoProd(resultadoBusqueda.getString("codigo"));
                 p.setNombreProd(resultadoBusqueda.getString("nombre"));
                 p.setCategoria(resultadoBusqueda.getString("tipo"));
@@ -246,15 +240,14 @@ public class TransferirProducto extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "No se puede transeferir en la misma sucursal.\n Selecione una sucursal de destino diferente");
                 }else{
                     if(cantidad<resultadoBusqueda.getInt("cantidad")){
-                        EditarDestino(p);
+                        Validar(p);
                         int cantidadF = resultadoBusqueda.getInt("cantidad")-cantidad;
-                        Transferir(p);
                         p.setCantidad(cantidadF);
                         EditarOrigen(p);
                     }else if(cantidad == resultadoBusqueda.getInt("cantidad")){
                         Validar(p);
-                        Eliminar(p);
                         Transferir(p);
+                        Eliminar(p);
                     }else{
                         JOptionPane.showMessageDialog(null, "Cantidad Insuficiente para transferir");
                     }
@@ -273,14 +266,14 @@ public class TransferirProducto extends javax.swing.JFrame {
         try {
             Connection nuevaConexion = DriverManager.getConnection(
                     "jdbc:mysql://localhost/basedatos", "root", "Steve123.");
-            String comando_select = "SELECT CODIGO FROM "+ sDestino+" WHERE codigo = ?";
+            String comando_select = "SELECT CODIGO, CANTIDAD FROM "+ sDestino+" WHERE codigo = ?";
             PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_select);
             nuevoStatamentPreparado.setString(1, txfCodigo.getText());
             ResultSet resultadoBusqueda = nuevoStatamentPreparado.executeQuery();
             if (resultadoBusqueda.next()) { 
-                EditarDestino(p);
+                EditarDestino(p, resultadoBusqueda.getInt("cantidad"));
             }else {
-                JOptionPane.showMessageDialog(this, "El registro buscado no existe");//SINO INDICA QUE NO EXISTE
+                Transferir(p);
            }
                 
         } catch (SQLException ex) {
@@ -344,27 +337,19 @@ public class TransferirProducto extends javax.swing.JFrame {
         }
     }
     
-    public void EditarDestino(Producto p){
-        String nomSucr = (String) cbxOrigen.getSelectedItem();
+    public void EditarDestino(Producto p, int num){
+        String nomSucr = (String) cbxDestino.getSelectedItem();
         int cantidad = Integer.parseInt(txfCantidad.getText());
         try {
             Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
-            String comando_select = "UPDATE " + nomSucr + " SET CANTIDAD = ? WHERE Codigo = ?";
+            String comando_select = "UPDATE " + nomSucr + " SET NOMBRE =?, TIPO = ?, CANTIDAD = ?, PRECIO = ? WHERE codigo = ?" ;
             PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_select);
-            ResultSet resultadoBusqueda = nuevoStatamentPreparado.executeQuery();
-            if (resultadoBusqueda.next()) {
-                if(p.getCodigoProd().equals(resultadoBusqueda.getInt("codigo"))){
-                    int cantidadF = resultadoBusqueda.getInt("cantidad")+cantidad;
-                    p.setCantidad(cantidadF);
-                    nuevoStatamentPreparado.setString(1, Integer.toString(p.getCantidad()));
-                    nuevoStatamentPreparado.setString(2, p.getCodigoProd());
-                }else{
-                    JOptionPane.showMessageDialog(this, "Producto No encontrado");
-                }
-            }
+            nuevoStatamentPreparado.setString(1, p.getNombreProd());
+            nuevoStatamentPreparado.setString(2, p.getCategoria());
+            nuevoStatamentPreparado.setInt(3, num+cantidad);
+            nuevoStatamentPreparado.setDouble(4, p.getPrecio());
+            nuevoStatamentPreparado.setString(5, p.getCodigoProd());
             nuevoStatamentPreparado.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Producto de destino modificado");
-            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "ha ocurrido un error al conectarse a la base de datos. Error " + ex.getMessage());
         }

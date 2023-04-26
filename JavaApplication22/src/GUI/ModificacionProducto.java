@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Clase.LeerSucursales;
 import Clase.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author erlos
  */
-public class ModificacionProducto extends javax.swing.JFrame {
+public class ModificacionProducto extends javax.swing.JFrame implements LeerSucursales{
 
     /**
      * Creates new form ModificacionProducto
@@ -275,8 +276,7 @@ public class ModificacionProducto extends javax.swing.JFrame {
         try {
             
             Connection nuevaConexion = DriverManager.getConnection("jdbc:mysql://localhost/basedatos", "root", "Steve123.");
-            String comando_select = "UPDATE " + nomSucr + " SET NOMBRE = "
-                    + "?, TIPO = ?, CANTIDAD = ?, PRECIO = ? WHERE Codigo = ?";
+            String comando_select = "UPDATE " + nomSucr + " SET NOMBRE =?, TIPO = ?, CANTIDAD = ?, PRECIO = ? WHERE Codigo = ?";
             PreparedStatement nuevoStatamentPreparado = nuevaConexion.prepareStatement(comando_select);
             nuevoStatamentPreparado.setString(1, p.getCategoria());
             nuevoStatamentPreparado.setString(2, p.getNombreProd());

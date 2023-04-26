@@ -10,7 +10,7 @@ public class PedidoHaciaProveedor extends javax.swing.JFrame {
 
     public PedidoHaciaProveedor() {
         initComponents();
-         this.setLocationRelativeTo(null);
+         this.setLocation(220,220);
     }
 
     @SuppressWarnings("unchecked")
@@ -24,6 +24,7 @@ public class PedidoHaciaProveedor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         bttEnviarSolicitud = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        bttvolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +58,15 @@ public class PedidoHaciaProveedor extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("Pedidos A Proveedor");
 
+        bttvolver.setBackground(new java.awt.Color(0, 0, 255));
+        bttvolver.setForeground(new java.awt.Color(240, 240, 240));
+        bttvolver.setText("Volver");
+        bttvolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttvolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -64,15 +74,19 @@ public class PedidoHaciaProveedor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(lblPaSolicitr)
-                    .addComponent(jLabel2)
-                    .addComponent(txfProductoSolicitado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(134, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bttEnviarSolicitud)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(lblPaSolicitr)
+                            .addComponent(jLabel2)
+                            .addComponent(txfProductoSolicitado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 128, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bttEnviarSolicitud)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bttvolver)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -89,7 +103,9 @@ public class PedidoHaciaProveedor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(bttEnviarSolicitud)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bttvolver)
+                    .addComponent(bttEnviarSolicitud))
                 .addContainerGap())
         );
 
@@ -128,6 +144,15 @@ public class PedidoHaciaProveedor extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bttEnviarSolicitudActionPerformed
 
+    private void bttvolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttvolverActionPerformed
+        VentaPrincipal vp = new VentaPrincipal();
+        Proveedor pr = new Proveedor();
+        vp.setVisible(true);
+        pr.setVisible(false);
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_bttvolverActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -162,6 +187,7 @@ public class PedidoHaciaProveedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttEnviarSolicitud;
+    private javax.swing.JButton bttvolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
